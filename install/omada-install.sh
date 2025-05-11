@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
@@ -36,16 +37,19 @@ wget -qL https://repo.mongodb.org/apt/ubuntu/dists/bionic/mongodb-org/3.6/multiv
 $STD dpkg -i mongodb-org-server_3.6.23_amd64.deb
 msg_ok "Installed MongoDB"
 
+latest_url=$(curl -fsSL "https://support.omadanetworks.com/en/product/omada-software-controller/?resourceType=download" | grep -o 'https://.*x64.deb' | head -n1)
+latest_version=$(basename "$latest_url")
+
 msg_info "Installing Omada Controller"
-wget -qL https://static.tp-link.com/upload/software/2025/202504/20250425/omada_v5.15.20.20_linux_x64_20250416110555.deb
-$STD dpkg -i omada_v5.15.20.20_linux_x64_20250416110555.deb
+wget -qL ${latest_url}
+$STD dpkg -i ${latest_version}
 msg_ok "Installed Omada Controller"
 
 motd_ssh
 customize
 
 msg_info "Cleaning up"
-rm -rf omada_v5.15.20.20_linux_x64_20250416110555.deb mongodb-org-server_3.6.23_amd64.deb zulu-repo_1.0.0-3_all.deb $libssl
+rm -rf ${latest_version} mongodb-org-server_3.6.23_amd64.deb zulu-repo_1.0.0-3_all.deb $libssl
 $STD apt-get -y autoremove
 $STD apt-get -y autoclean
 msg_ok "Cleaned"
