@@ -38,15 +38,14 @@ msg_ok "Installed MongoDB"
 
 msg_info "Installing Omada Controller"
 wget -qL https://static.tp-link.com/upload/software/2025/202504/20250425/omada_v5.15.20.20_linux_x64_20250416110555.deb
-latest_version=omada_v5.15.20.20_linux_x64_20250416110555.deb
-$STD dpkg -i ${latest_version}
+$STD dpkg -i omada_v5.15.20.20_linux_x64_20250416110555.deb
 msg_ok "Installed Omada Controller"
 
 motd_ssh
 customize
 
 msg_info "Cleaning up"
-rm -rf ${latest_version} mongodb-org-server_3.6.23_amd64.deb zulu-repo_1.0.0-3_all.deb $libssl
+rm -rf omada_v5.15.20.20_linux_x64_20250416110555.deb mongodb-org-server_3.6.23_amd64.deb zulu-repo_1.0.0-3_all.deb $libssl
 $STD apt-get -y autoremove
 $STD apt-get -y autoclean
 msg_ok "Cleaned"
