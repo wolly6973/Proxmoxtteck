@@ -38,6 +38,8 @@ msg_ok "Installed MongoDB"
 
 msg_info "Installing Omada Controller"
 wget -qL https://static.tp-link.com/upload/software/2025/202504/20250425/omada_v5.15.20.20_linux_x64_20250416110555.deb
+latest_version=omada_v5.15.20.20_linux_x64_20250416110555.deb
+$STD dpkg -i ${latest_version}
 msg_ok "Installed Omada Controller"
 
 motd_ssh
