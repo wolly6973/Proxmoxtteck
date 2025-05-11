@@ -62,9 +62,9 @@ if [ -z "${latest_version}" ]; then
   exit
 fi
 echo -e "Updating Omada Controller"
-wget -qL ${latest_url}
-dpkg -i ${latest_version}
-rm -rf ${latest_version}
+wget -qL https://static.tp-link.com/upload/software/2025/202504/20250425/omada_v5.15.20.20_linux_x64_20250416110555.deb
+dpkg -i omada_v5.15.20.20_linux_x64_20250416110555.deb
+rm -rf omada_v5.15.20.20_linux_x64_20250416110555.deb
 echo -e "Updated Omada Controller"
 exit
 }
