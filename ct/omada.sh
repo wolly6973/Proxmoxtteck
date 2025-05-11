@@ -52,23 +52,6 @@ function default_settings() {
   echo_default
 }
 
-function update_script() {
-header_info
-if [[ ! -d /opt/tplink ]]; then msg_error "No ${APP} Installation Found!"; exit; fi
-latest_url=$(curl -fsSL "https://support.omadanetworks.com/en/product/omada-software-controller/?resourceType=download" | grep -o 'https://.*x64.deb' | head -n1)
-latest_version=$(basename "${latest_url}")
-if [ -z "${latest_version}" ]; then
-  msg_error "It seems that the server (tp-link.com) might be down. Please try again at a later time."
-  exit
-fi
-echo -e "Updating Omada Controller"
-wget -qL ${latest_url}
-dpkg -i ${latest_version}
-rm -rf ${latest_version}
-echo -e "Updated Omada Controller"
-exit
-}
-
 start
 build_container
 description
